@@ -1,0 +1,12 @@
+.about-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0px;
+}

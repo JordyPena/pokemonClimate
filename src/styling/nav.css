@@ -1,0 +1,31 @@
+.Nav {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+}
+
+.link-style {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: black;
+  width: 100%;
+}
+.link-style,
+a {
+  color: grey;
+  text-decoration: none;
+}
+
+.bg-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+a:hover {
+  color: #245c73;
+}
+
+a:active {
+  color: #4b8ca6;
+}
