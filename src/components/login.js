@@ -18,8 +18,7 @@ class Login extends Component {
           <input
             type="text"
             name="username"
-            onChange=""
-            onSubmit=""
+           
             required
             placeholder="username"
           />
@@ -28,8 +27,7 @@ class Login extends Component {
           <input
             type="text"
             name="password"
-            onChange=""
-            onSubmit=""
+           
             required
             placeholder="password"
           />
@@ -42,10 +40,10 @@ class Login extends Component {
           <label>
             <p className="signup-p">Create an account</p>
           </label>
-          <input type="text" name="username" onChange="" onSubmit="" required />
+          <input type="text" name="username"  required />
         </form>
         <form className="signup-bar">
-          <input type="text" name="password" onChange="" onSubmit="" required />
+          <input type="text" name="password"  required />
           <button className="signup-button" type="submit">
             Sign up
           </button>

@@ -8,6 +8,9 @@ class LandingPage extends Component {
     this.state = {};
   }
 
+  handleChange = () => {
+    console.log("handleChange landingPage component")
+  }
   render() {
     return (
       <>
@@ -45,7 +48,8 @@ class LandingPage extends Component {
                 className="checkbox"
                 name="verification"
                 type="checkbox"
-                checked=""
+                checked={this.handleChange}
+                onChange={this.handleChange}
               />
               <label>Yes</label>
             </form>

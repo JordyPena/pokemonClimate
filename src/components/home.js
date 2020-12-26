@@ -5,7 +5,19 @@ class Home extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      value: "",
+
+    };
+  }
+
+  handleChange = () => {
+    console.log("handleChange home component")
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+    console.log("handleSubmit home component")
   }
 
   render() {
@@ -17,7 +29,7 @@ class Home extends Component {
 
         <form className="city-search" onSubmit="">
           <label>Enter city name</label>
-          <input type="text" name="cityname" value="" onChange="" required />
+          <input type="text" name="cityname" value={this.state.value} onChange={this.handleChange} required />
           <button type="submit" className="city-button">
             Search
           </button>
