@@ -38,7 +38,7 @@ class Home extends Component {
 
         <section className="results">
           <img src={charizard} alt="pokemon img"/>
-          <h2 className="weather">Dallas</h2>
+          <h2 className="weather">Dallas, Tx</h2>
           <h3>Sunny</h3>
           <h2>92 degrees</h2>
           <h3>H: 95 L:82</h3>
