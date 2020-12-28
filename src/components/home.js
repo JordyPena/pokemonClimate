@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../styling/home.css";
+import charizard from "../images/charizard.png"
 
 class Home extends Component {
   constructor(props) {
@@ -36,8 +37,11 @@ class Home extends Component {
         </form>
 
         <section className="results">
-          <h2>results will render here</h2>
-          <p className="weather">weather 90 degrees</p>
+          <img src={charizard} alt="pokemon img"/>
+          <h2 className="weather">Dallas</h2>
+          <h3>Sunny</h3>
+          <h2>92 degrees</h2>
+          <h3>H: 95 L:82</h3>
         </section>
       </>
     );
