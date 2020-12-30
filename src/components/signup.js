@@ -1,20 +1,25 @@
 import React, { Component } from "react";
-import "../styling/login.css";
-import Signup from "../components/signup";
 
 const URL = process.env.REACT_APP_DB_URL;
 
-class Login extends Component {
+class Signup extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: "demo",
-      password: "1111",
+      username: "",
+      password: "",
       password_confirmation: "",
+      registrationErrors: "",
       modal: false,
     };
   }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
 
   hideModal = (event) => {
     event.preventDefault();
@@ -29,39 +34,33 @@ class Login extends Component {
     });
   };
 
-  handleSuccessfulAuth = () => {
-    this.props.handleLogin();
-    this.props.history.push("/home");
-  };
-
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
   handleSubmit = (event) => {
     const { username, password } = this.state;
     const data = { username, password };
     event.preventDefault();
-    fetch(`${URL}/api/accounts/account`, {
+    fetch(`${URL}/api/accounts`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-type": "application/json",
-       
+      
       },
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.error) {
-          this.showModal();
-        } else {
-          this.handleSuccessfulAuth();
+      .then((response) => {
+        if (response.status === 401) {
+          throw new Error("User already exist");
         }
+        if (response.status === 400) {
+          throw new Error("Fill out all inputs");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        this.props.handleSuccessfulAuth();
       })
       .catch((err) => {
-        console.log(err);
+        this.showModal(err.message);
+        console.error(err);
       });
   };
 
@@ -69,7 +68,7 @@ class Login extends Component {
     const modal = (
       <div className="modal-container">
         <form className="modal" onSubmit={this.hideModal}>
-          <p>Username doesn't exist please register</p>
+          <p>Username already exists</p>
           <button className="modal-button" type="submit">
             Okay
           </button>
@@ -79,10 +78,9 @@ class Login extends Component {
     return (
       <>
         {this.state.modal ? modal : ""}
-       
-        <form onSubmit={this.handleSubmit} className="login-bar">
+        <form onSubmit={this.handleSubmit} className="signup-bar">
           <label>
-            <p className="login-p">Already have an account?</p>
+            <p className="signup-p">Create an account</p>
           </label>
           <input
             type="username"
@@ -101,15 +99,23 @@ class Login extends Component {
             onChange={this.handleChange}
             required
           />
-          <button className="login-button" type="submit">
-            Login
+
+          <input
+            type="password"
+            name="password_confirmation"
+            placeholder="Password Confirmation"
+            value={this.state.password_confirmation}
+            onChange={this.handleChange}
+            required
+          />
+
+          <button className="signup-button" type="submit">
+            Sign up
           </button>
         </form>
-        <Signup 
-          handleSuccessfulAuth={this.handleSuccessfulAuth}/>
       </>
     );
   }
 }
 
-export default Login;
+export default Signup;
