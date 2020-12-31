@@ -10,7 +10,7 @@ class Login extends Component {
 
     this.state = {
       username: "demo",
-      password: "1111",
+      password: "Password1!",
       password_confirmation: "",
       modal: false,
     };
