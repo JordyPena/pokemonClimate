@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
 const URL = process.env.REACT_APP_DB_URL;
 
 class Signup extends Component {
@@ -10,7 +11,7 @@ class Signup extends Component {
       username: "",
       password: "",
       password_confirmation: "",
-      registrationErrors: "",
+      error: null,
       modal: false,
     };
   }
@@ -38,6 +39,19 @@ class Signup extends Component {
     const { username, password } = this.state;
     const data = { username, password };
     event.preventDefault();
+    if (password.length < 8) {
+      return this.setState({error: 'Password must be longer than 8 characters'})
+    }
+    if (password.length > 72) {
+      return this.setState({error:'Password must be less than 72 characters'})
+    }
+    if (password.startsWith(' ') || password.endsWith(' ')) {
+      return this.setState({error:'Password must not start or end with empty spaces'})
+    }
+    if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
+             return this.setState({error:'Password must contain 1 upper case letter, lower case letter, number and special character'})
+           }
+
     fetch(`${URL}/api/accounts`, {
       method: "POST",
       body: JSON.stringify(data),
@@ -53,9 +67,11 @@ class Signup extends Component {
         if (response.status === 400) {
           throw new Error("Fill out all inputs");
         }
+        
         return response.json();
       })
       .then((data) => {
+        console.log("its data", data)
         this.props.handleSuccessfulAuth();
       })
       .catch((err) => {
@@ -68,7 +84,7 @@ class Signup extends Component {
     const modal = (
       <div className="modal-container">
         <form className="modal" onSubmit={this.hideModal}>
-          <p>Username already exists</p>
+          <p>Username already exists, try signing in</p>
           <button className="modal-button" type="submit">
             Okay
           </button>
@@ -99,7 +115,7 @@ class Signup extends Component {
             onChange={this.handleChange}
             required
           />
-
+         
           <input
             type="password"
             name="password_confirmation"
@@ -108,7 +124,7 @@ class Signup extends Component {
             onChange={this.handleChange}
             required
           />
-
+           {this.state.error}
           <button className="signup-button" type="submit">
             Sign up
           </button>

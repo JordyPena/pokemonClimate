@@ -16,8 +16,6 @@ class App extends Component {
     };
   }
 
-  
-
   handleLogin = () => {
     this.setState({
       isLoggedIn: true,
@@ -30,11 +28,13 @@ class App extends Component {
     });
   };
 
+  
+
   render() {
-    console.log("logged in", this.state.isLoggedIn)
+    console.log("logged in", this.state.isLoggedIn);
     return (
       <>
-        <Nav isLoggedIn={this.state.isLoggedIn}/>
+        <Nav isLoggedIn={this.state.isLoggedIn} />
 
         <Route
           exact
@@ -60,7 +60,13 @@ class App extends Component {
           }}
         />
 
-        <Route exact path="/" component={LandingPage} />
+        <Route
+          exact
+          path="/"
+          render={(props) => {
+            return <LandingPage {...props} />;
+          }}
+        />
 
         <Footer />
       </>

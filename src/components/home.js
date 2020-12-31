@@ -14,6 +14,7 @@ import moderateRain from "../images/moderate-rain.png"
 import lightRain from "../images/light-rain.png"
 import scatteredClouds from "../images/scattered-clouds.png"
 import lightSnow from "../images/light-snow.png"
+import misty from "../images/misty.png";
 
 class Home extends Component {
   constructor(props) {
@@ -22,6 +23,8 @@ class Home extends Component {
     this.state = {
       cityName: "",
       weather: "",
+      isOver13: false,
+      modal: true,
     };
   }
 
@@ -66,11 +69,58 @@ class Home extends Component {
     if (temp.includes("heavy rain")) return rainy
     if (temp.includes("moderate snow")) return snow
     if (temp.includes("thunder")) return storm
+    if (temp.includes("mist")) return misty
   };
 
+  hideModal = (event) => {
+    event.preventDefault();
+    this.setState({
+      modal: false,
+    });
+    this.props.history.push("/login")
+  };
+
+  showModal = () => {
+    this.setState({
+      modal: true,
+    });
+  };
+
+  handleCheckbox = (event) => {
+    this.setState({
+      isOver13: event.target.checked,
+    });
+  };
+
+  
   render() {
+    
+    
+    const modal = (
+      <div className="modal-container">
+        <form className="modal" onSubmit={this.hideModal}>
+          <h3>Are you 13 years old?</h3>
+          <input
+            className="checkbox"
+            name="checkbox"
+            type="checkbox"
+            checked={this.state.isOver13}
+            onChange={this.handleCheckbox}
+            required
+          />
+          <label>{this.state.isOver13 ? "Yes" : "No"}</label>
+
+          <button className="modal-button" type="submit">
+            Okay
+          </button>
+        </form>
+      </div>
+    );
+   
     return (
       <>
+      {this.props.isLoggedIn ? "" : modal}
+
         <header className="header-home">
           <h1>Pokemon Climate</h1>
         </header>
