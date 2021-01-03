@@ -16,7 +16,6 @@ class LandingPage extends Component {
                 Welcome to Pokemon Climate, this app is created for kids as a
                 learning app, To increase interest in meteorology and climate.
               </p>
-              <p className="welcome-p"> Must be 13+ years old</p>
               <p className="welcome-p">
                 In order to use the app please create an account.
               </p>
