@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import LandingPage from "./components/landingPage";
 import Nav from "./components/nav";
-import Footer from "./components/footer";
 import Home from "./components/home";
 import About from "./components/about";
 import Login from "./components/login";
@@ -34,11 +33,11 @@ class App extends Component {
     console.log("logged in", this.state.isLoggedIn);
     return (
       <>
-        <Nav isLoggedIn={this.state.isLoggedIn} />
+        <Nav isLoggedIn={this.state.isLoggedIn} handleLogout={this.handleLogout} />
 
         <Route
           exact
-          path="/home"
+          path="/"
           render={(props) => {
             return <Home {...props} isLoggedIn={this.state.isLoggedIn} />;
           }}
@@ -62,13 +61,13 @@ class App extends Component {
 
         <Route
           exact
-          path="/"
+          path="/welcome"
           render={(props) => {
             return <LandingPage {...props} />;
           }}
         />
-
-        <Footer />
+        
+    
       </>
     );
   }

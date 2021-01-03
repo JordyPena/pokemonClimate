@@ -1,12 +1,28 @@
 .about-header {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  color: white;
+  cursor: pointer;
+  padding-top: 20px;
 }
+
 
 .about-p {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin: 0px;
+  margin: 5px;
+  padding: 5px;
+  color: white;
+  font-size: 20px;
+}
+
+
+.bg-container {
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  opacity: 0.9;
 }

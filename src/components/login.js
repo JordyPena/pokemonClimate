@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../styling/login.css";
 import Signup from "../components/signup";
 
+
 const URL = process.env.REACT_APP_DB_URL;
 
 class Login extends Component {
@@ -13,6 +14,8 @@ class Login extends Component {
       password: "Password1!",
       password_confirmation: "",
       modal: false,
+      signUp: false,
+      login: true,
     };
   }
 
@@ -31,7 +34,7 @@ class Login extends Component {
 
   handleSuccessfulAuth = () => {
     this.props.handleLogin();
-    this.props.history.push("/home");
+    this.props.history.push("/");
   };
 
   handleChange = (event) => {
@@ -49,7 +52,6 @@ class Login extends Component {
       body: JSON.stringify(data),
       headers: {
         "Content-type": "application/json",
-       
       },
     })
       .then((response) => response.json())
@@ -65,8 +67,12 @@ class Login extends Component {
       });
   };
 
-  
-  
+  handleClick = () => {
+    this.setState({
+      signUp: true,
+      login: false
+    })
+  }
 
   render() {
     const modal = (
@@ -79,37 +85,56 @@ class Login extends Component {
         </form>
       </div>
     );
-    return (
-      <>
-        {this.state.modal ? modal : ""}
-       
-        <form onSubmit={this.handleSubmit} className="login-bar">
-          <label>
-            <p className="login-p">Already have an account?</p>
-          </label>
+
+    const loginForm = (
+      <div className="center">
+      <form onSubmit={this.handleSubmit}>
+        <h1>Login</h1>
+        <div className="txt-field">
           <input
             type="username"
             name="username"
-            placeholder="Username"
             value={this.state.username}
             onChange={this.handleChange}
             required
           />
-
+          <span></span>
+          <label>Username</label>
+        </div>
+        <div className="txt-field">
           <input
             type="password"
             name="password"
-            placeholder="Password"
             value={this.state.password}
             onChange={this.handleChange}
             required
           />
-          <button className="login-button" type="submit">
-            Login
+          <span></span>
+          <label>Password</label>
+        </div>
+        <button className="login-button" type="submit">
+          Login
+        </button>
+        <div className="member-p">
+          Not a member?
+          <button onClick={() => this.handleClick()}>
+          Signup
           </button>
-        </form>
-        <Signup 
-          handleSuccessfulAuth={this.handleSuccessfulAuth}/>
+        </div>
+      </form>
+    
+    </div>
+    );
+    const pleaseLogin = <div className="warning">Please Login First</div>;
+    
+    return (
+      <>
+        {this.props.history.action === "REPLACE" && pleaseLogin}
+        {this.state.login ? loginForm : ""}
+        {this.state.modal ? modal : ""}
+        { this.state.signUp &&
+          <Signup 
+      handleSuccessfulAuth={this.handleSuccessfulAuth}/> }
       </>
     );
   }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/
+const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
 const URL = process.env.REACT_APP_DB_URL;
 
 class Signup extends Component {
@@ -40,24 +40,32 @@ class Signup extends Component {
     const data = { username, password };
     event.preventDefault();
     if (password.length < 8) {
-      return this.setState({error: 'Password must be longer than 8 characters'})
+      return this.setState({
+        error: "Password must be longer than 8 characters",
+      });
     }
     if (password.length > 72) {
-      return this.setState({error:'Password must be less than 72 characters'})
+      return this.setState({
+        error: "Password must be less than 72 characters",
+      });
     }
-    if (password.startsWith(' ') || password.endsWith(' ')) {
-      return this.setState({error:'Password must not start or end with empty spaces'})
+    if (password.startsWith(" ") || password.endsWith(" ")) {
+      return this.setState({
+        error: "Password must not start or end with empty spaces",
+      });
     }
     if (!REGEX_UPPER_LOWER_NUMBER_SPECIAL.test(password)) {
-             return this.setState({error:'Password must contain 1 upper case letter, lower case letter, number and special character'})
-           }
+      return this.setState({
+        error:
+          "Password must contain 1 upper case letter, lower case letter, number and special character",
+      });
+    }
 
     fetch(`${URL}/api/accounts`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
         "Content-type": "application/json",
-      
       },
     })
       .then((response) => {
@@ -67,11 +75,11 @@ class Signup extends Component {
         if (response.status === 400) {
           throw new Error("Fill out all inputs");
         }
-        
+
         return response.json();
       })
       .then((data) => {
-        console.log("its data", data)
+        console.log("its data", data);
         this.props.handleSuccessfulAuth();
       })
       .catch((err) => {
@@ -94,41 +102,48 @@ class Signup extends Component {
     return (
       <>
         {this.state.modal ? modal : ""}
-        <form onSubmit={this.handleSubmit} className="signup-bar">
-          <label>
-            <p className="signup-p">Create an account</p>
-          </label>
-          <input
-            type="username"
-            name="username"
-            placeholder="Username"
-            value={this.state.username}
-            onChange={this.handleChange}
-            required
-          />
-
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleChange}
-            required
-          />
-         
-          <input
-            type="password"
-            name="password_confirmation"
-            placeholder="Password Confirmation"
-            value={this.state.password_confirmation}
-            onChange={this.handleChange}
-            required
-          />
-           {this.state.error}
-          <button className="signup-button" type="submit">
-            Sign up
-          </button>
-        </form>
+        <div className="center">
+          <form onSubmit={this.handleSubmit}>
+            <h1>Sign up</h1>
+            <div className="txt-field">
+              <input
+                type="username"
+                name="username"
+                value={this.state.username}
+                onChange={this.handleChange}
+                required
+              />
+              <span></span>
+              <label>Username</label>
+            </div>
+            <div className="txt-field">
+              <input
+                type="password"
+                name="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+                required
+              />
+              <span></span>
+              <label>Password</label>
+            </div>
+            <div className="txt-field">
+              <input
+                type="password"
+                name="password_confirmation"
+                value={this.state.password_confirmation}
+                onChange={this.handleChange}
+                required
+              />
+              <span></span>
+              <label>Password Confirmation</label>
+            </div>
+            {this.state.error}
+            <button className="signup-button" type="submit">
+              Sign up
+            </button>
+          </form>
+        </div>
       </>
     );
   }

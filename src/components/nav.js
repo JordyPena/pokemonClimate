@@ -1,29 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styling/nav.css";
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+import * as BsIcons from "react-icons/bs"
+import * as FiIcons from "react-icons/fi"
 
 function Nav(props) {
+  const [sidebar, setSidebar] = useState(false);
+
+  const showSidebar = () => {
+    console.log("working");
+    setSidebar(!sidebar);
+  };
+
+  const handleLogoutClick = () => {
+    props.handleLogout();
+    if(props.history === undefined) return;
+    props.history.push("/");
+  }
+
   return (
     <>
-      <nav className="Nav">
-        <div className="bg-container">
-          <div className="background-img container"></div>
+      <div className="navbar">
+        <Link to="#" className="menu-bars">
+          <FaIcons.FaBars onClick={showSidebar} />
+        </Link>
+      </div>
 
-          <div className="link-style container">
-            <Link to="/home">
-              <h3>Home</h3>
+      <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
+        <ul className="nav-menu-items" onClick={showSidebar}>
+          <li className="navbar-toggle">
+            <Link to="#" className="menu-bars">
+              <AiIcons.AiOutlineClose />
             </Link>
+          </li>
+          <li className="nav-text">
+            <Link to="/">
+            <AiIcons.AiFillHome/>
 
+            </Link>
+          </li>
+          <li className="nav-text">
             <Link to="/about">
-              <h3>About</h3>
+            <BsIcons.BsFillInfoCircleFill/>
             </Link>
-            {props.isLoggedIn === false && ( 
-            <Link to="/login">
-              <h3>Login</h3>
-            </Link>
-            )}
-          </div>
-        </div>
+          </li>
+          {props.isLoggedIn === false ?
+          <li className="nav-text">
+          <Link to="/login">
+          <AiIcons.AiOutlineLogin/>
+          </Link>
+        </li> : <li className="nav-text">
+        <button
+          onClick={() => handleLogoutClick()}
+        ><FiIcons.FiLogOut/></button>
+          </li>}  
+        </ul>
       </nav>
     </>
   );

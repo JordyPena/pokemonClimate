@@ -22,7 +22,7 @@ class LandingPage extends Component {
     this.setState({
       modal: false,
     });
-    this.props.history.push("/login")
+    this.props.history.push("/login");
   };
 
   showModal = () => {
@@ -32,53 +32,57 @@ class LandingPage extends Component {
   };
 
   render() {
-    const { isOver13 } = this.state;
+    // const { isOver13 } = this.state;
 
-    const modal = (
-      <div className="modal-container">
-        <form className="modal" onSubmit={this.hideModal}>
-          <h3>Are you 13 years old?</h3>
-          <input
-            className="checkbox"
-            name="checkbox"
-            type="checkbox"
-            checked={isOver13}
-            onChange={this.handleChange}
-            required
-          />
-          <label>{isOver13 ? "Yes" : "No"}</label>
+    // const modal = (
+    //   <div className="modal-container">
+    //     <form className="modal" onSubmit={this.hideModal}>
+    //       <h3 className="modal-header">Are you 13+ years old?</h3>
+    //       <input
+    //         className="checkbox"
+    //         name="checkbox"
+    //         type="checkbox"
+    //         checked={isOver13}
+    //         onChange={this.handleChange}
+    //         required
+    //       />
+    //       <label className="modal-label">Yes</label>
 
-          <button className="modal-button" type="submit">
-            Okay
-          </button>
-        </form>
-      </div>
-    );
+    //       <button className="modal-button" type="submit" disabled={!isOver13}>
+    //         Continue
+    //       </button>
+    //     </form>
+    //   </div>
+    // );
     return (
       <>
-        {this.state.modal ? modal : ""}
-
+        {/* {this.state.modal ? modal : ""} */}
         <div className="landingPage-content">
           <header className="landing-header">
-            <h1>LandingPage</h1>
+            <h1>Welcome</h1>
           </header>
 
           <section>
-            <div className="welcome">
-              <h3>Welcome</h3>
-              <p>
-                Welcome to Pokemon Climate, this app was created for kids as a
+            <div className="welcome-h">
+            
+              <p className="welcome-p">
+                Welcome to Pokemon Climate, this app is created for kids as a
                 learning app, To increase interest in meteorology and climate.
               </p>
-              <p>In order to use the app please create an account.</p>
-              <p>
+              <p className="welcome-p"> Must be 13+ years old</p>
+              <p className="welcome-p">
+                In order to use the app please create an account.
+              </p>
+              <p className="welcome-p">
                 Teachers and parents please create an account to grant access to
                 the app for your students or your children.
               </p>
-              <p>
-                In the search bar please type in the name of a city, Your
-                results will return the weather along with a pokemon sprite to
-                demonstrate the weather at that time.
+              <p className="welcome-p">
+                In the search bar please type in the name of a city in the US.
+              </p>
+              <p className="welcome-p">
+                Your results will return the weather along with a pokemon sprite
+                to demonstrate the weather at that time.
               </p>
             </div>
           </section>
