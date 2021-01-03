@@ -42,10 +42,10 @@
   background-color: black;
 }
 
-.modal-button:disabled, button[disabled] {
+.modal-button:disabled,
+button[disabled] {
   background-color: red;
 }
-
 
 .modal-container {
   width: 100%;
@@ -65,7 +65,8 @@
   padding: 2px;
 }
 
-.modal-header, .modal-button {
+.modal-header,
+.modal-button {
   margin: 2px;
   padding: 2px;
   display: flex;
@@ -73,9 +74,8 @@
 }
 
 .landingPage-content {
-  
-    background-color: black;
-    height: 100%;
-    width: 100%;
-    opacity: 0.9;
+  background-color: black;
+  height: 100%;
+  width: 100%;
+  opacity: 0.9;
 }

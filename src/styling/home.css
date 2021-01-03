@@ -88,13 +88,9 @@
   margin: 5px;
 }
 
-
-
-
-
 .pokeballs img {
-width: 50px;
-animation: pokeball 7s linear infinite;
+  width: 50px;
+  animation: pokeball 7s linear infinite;
 }
 
 .pokeballs {
@@ -108,19 +104,17 @@ animation: pokeball 7s linear infinite;
 }
 
 @keyframes pokeball {
-  0%{
+  0% {
     transform: translateY(0);
     opacity: 0;
   }
-  50%{
-   
+  50% {
     opacity: 1;
   }
-  70%{
-   
+  70% {
     opacity: 1;
   }
-  100%{
+  100% {
     transform: translateY(-80vh);
     opacity: 0;
   }

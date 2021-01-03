@@ -27,13 +27,14 @@ class App extends Component {
     });
   };
 
-  
-
   render() {
     console.log("logged in", this.state.isLoggedIn);
     return (
       <>
-        <Nav isLoggedIn={this.state.isLoggedIn} handleLogout={this.handleLogout} />
+        <Nav
+          isLoggedIn={this.state.isLoggedIn}
+          handleLogout={this.handleLogout}
+        />
 
         <Route
           exact
@@ -66,8 +67,6 @@ class App extends Component {
             return <LandingPage {...props} />;
           }}
         />
-        
-    
       </>
     );
   }

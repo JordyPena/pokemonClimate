@@ -32,31 +32,8 @@ class LandingPage extends Component {
   };
 
   render() {
-    // const { isOver13 } = this.state;
-
-    // const modal = (
-    //   <div className="modal-container">
-    //     <form className="modal" onSubmit={this.hideModal}>
-    //       <h3 className="modal-header">Are you 13+ years old?</h3>
-    //       <input
-    //         className="checkbox"
-    //         name="checkbox"
-    //         type="checkbox"
-    //         checked={isOver13}
-    //         onChange={this.handleChange}
-    //         required
-    //       />
-    //       <label className="modal-label">Yes</label>
-
-    //       <button className="modal-button" type="submit" disabled={!isOver13}>
-    //         Continue
-    //       </button>
-    //     </form>
-    //   </div>
-    // );
     return (
       <>
-        {/* {this.state.modal ? modal : ""} */}
         <div className="landingPage-content">
           <header className="landing-header">
             <h1>Welcome</h1>
@@ -64,7 +41,6 @@ class LandingPage extends Component {
 
           <section>
             <div className="welcome-h">
-            
               <p className="welcome-p">
                 Welcome to Pokemon Climate, this app is created for kids as a
                 learning app, To increase interest in meteorology and climate.
