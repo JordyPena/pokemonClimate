@@ -79,7 +79,6 @@ class Signup extends Component {
         return response.json();
       })
       .then((data) => {
-        console.log("its data", data);
         this.props.handleSuccessfulAuth();
       })
       .catch((err) => {

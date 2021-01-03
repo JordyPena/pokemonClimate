@@ -28,7 +28,6 @@ class App extends Component {
   };
 
   render() {
-    console.log("logged in", this.state.isLoggedIn);
     return (
       <>
         <Nav

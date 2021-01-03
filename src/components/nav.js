@@ -10,7 +10,6 @@ function Nav(props) {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => {
-    console.log("working");
     setSidebar(!sidebar);
   };
 

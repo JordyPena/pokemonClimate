@@ -44,7 +44,6 @@ class Home extends Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log("weather results", data);
         this.setState({
           weather: data,
         });
