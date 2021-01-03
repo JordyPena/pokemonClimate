@@ -11,7 +11,6 @@ class Login extends Component {
     this.state = {
       username: "demo",
       password: "Password1!",
-      password_confirmation: "",
       modal: false,
       signUp: false,
       login: true,

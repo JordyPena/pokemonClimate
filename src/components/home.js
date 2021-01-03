@@ -25,8 +25,6 @@ class Home extends Component {
     this.state = {
       cityName: "",
       weather: "",
-      isOver13: false,
-      modal: true,
     };
   }
 
@@ -72,20 +70,6 @@ class Home extends Component {
     if (temp.includes("snow")) return [snow, "snow"];
     if (temp.includes("thunder")) return [storm, "thunder"];
     if (temp.includes("mist")) return [misty, "mist"];
-  };
-
-  hideModal = (event) => {
-    event.preventDefault();
-    this.setState({
-      modal: false,
-    });
-    this.props.history.push("/login");
-  };
-
-  showModal = () => {
-    this.setState({
-      modal: true,
-    });
   };
 
   handleCheckbox = (event) => {

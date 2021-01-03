@@ -2,35 +2,6 @@ import React, { Component } from "react";
 import "../styling/landingPage.css";
 
 class LandingPage extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isOver13: false,
-      modal: true,
-    };
-  }
-
-  handleChange = (event) => {
-    this.setState({
-      isOver13: event.target.checked,
-    });
-  };
-
-  hideModal = (event) => {
-    event.preventDefault();
-    this.setState({
-      modal: false,
-    });
-    this.props.history.push("/login");
-  };
-
-  showModal = () => {
-    this.setState({
-      modal: true,
-    });
-  };
-
   render() {
     return (
       <>

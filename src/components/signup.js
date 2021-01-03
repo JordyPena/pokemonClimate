@@ -13,8 +13,14 @@ class Signup extends Component {
       password_confirmation: "",
       error: null,
       modal: false,
+      isOver13: false,
     };
   }
+  handleAge = () => {
+    this.setState({
+      isOver13: true,
+    });
+  };
 
   handleChange = (event) => {
     this.setState({
@@ -141,6 +147,16 @@ class Signup extends Component {
             <button className="signup-button" type="submit">
               Sign up
             </button>
+            <div className="member-p">
+              <input
+                type="checkbox"
+                name="age"
+                onChange={this.handleAge}
+                required
+              />
+
+              <label>13+ years old?</label>
+            </div>
           </form>
         </div>
       </>
