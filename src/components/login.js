@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../styling/login.css";
 import Signup from "../components/signup";
+import { withRouter } from "react-router-dom";
 
 const URL = process.env.REACT_APP_DB_URL;
 
@@ -30,11 +31,6 @@ class Login extends Component {
     });
   };
 
-  handleSuccessfulAuth = () => {
-    this.props.handleLogin();
-    this.props.history.push("/");
-  };
-
   handleChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
@@ -58,7 +54,7 @@ class Login extends Component {
         if (data.error) {
           this.showModal();
         } else {
-          this.handleSuccessfulAuth();
+          this.props.handleSuccessfulAuth(this.props);
         }
       })
       .catch((err) => {
@@ -133,16 +129,20 @@ class Login extends Component {
 
     return (
       <>
-        {console.log(this.props.history)}
-        {this.props.history === undefined || this.props.history.action === "REPLACE" && pleaseLogin}
+        {this.props.history === undefined ||
+          (this.props.history.action === "REPLACE" && pleaseLogin)}
         {this.state.login ? loginForm : ""}
         {this.state.modal ? modal : ""}
         {this.state.signUp && (
-          <Signup handleSuccessfulAuth={this.handleSuccessfulAuth}/>
+          <Signup
+            handleSuccessfulAuth={this.props.handleSuccessfulAuth}
+            handleLogin={this.props.handleLogin}
+            history={this.history}
+          />
         )}
       </>
     );
   }
 }
 
-export default Login;
+export default withRouter(Login);

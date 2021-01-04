@@ -25,7 +25,8 @@ class LandingPage extends Component {
                 the app for your students or your children.
               </p>
               <p className="welcome-p">
-                In the search bar type in the name of a city in the US.
+                In the search bar type in the zipcode of a city in the US or add
+                the country code to search for a city outside the US.
               </p>
               <p className="welcome-p">
                 Your results will return the weather along with a pokemon sprite

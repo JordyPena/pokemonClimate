@@ -16,6 +16,7 @@ import scatteredClouds from "../images/scattered-clouds.png";
 import lightSnow from "../images/light-snow.png";
 import misty from "../images/misty.png";
 import ball from "../images/ball.png";
+import untested from "../images/untested.png";
 import { Redirect } from "react-router-dom";
 
 class Home extends Component {
@@ -36,16 +37,17 @@ class Home extends Component {
   //get weather from weather api
   // when user submits a city name
   handleSubmit = (event) => {
-    console.log(this.state.cityZipcode)
+    const userInput = this.state.cityZipcode.replace(/\s/g, "");
+
     event.preventDefault();
     fetch(
-      `https://api.openweathermap.org/data/2.5/weather?zip=${this.state.cityZipcode}&units=imperial&appid=${process.env.REACT_APP_TOKEN}`
+      `https://api.openweathermap.org/data/2.5/weather?zip=${userInput}&units=imperial&appid=${process.env.REACT_APP_TOKEN}`
     )
       .then((response) => {
         if (response.status === 404) {
-          throw new Error("City not found")
+          throw new Error("City not found");
         }
-        return response.json()
+        return response.json();
       })
       .then((data) => {
         this.setState({
@@ -62,7 +64,6 @@ class Home extends Component {
   //to than render different pokemon and backgrounds
   //that match the current weather climate
   getPokemon = () => {
-    console.log(this.state.weather)
     const temp = this.state.weather.weather[0].description;
 
     if (temp.includes("light rain")) return [lightRain, "rain"];
@@ -82,16 +83,16 @@ class Home extends Component {
     if (temp.includes("thunder")) return [storm, "thunder"];
     if (temp.includes("mist")) return [misty, "mist"];
     if (temp.includes("drizzle")) return [lightRain, "rain"];
-    return [lightClouds,"clouds"]// normal type pokemon, normal background
+    return [untested, "untested"];
   };
 
   render() {
     //if i have weather in state
     // invoke getPokemon function
     // create variables to use in jsx
-    
-    const [pokemon, bgImage] = this.state.weather && this.getPokemon()
-    
+
+    const [pokemon, bgImage] = this.state.weather && this.getPokemon();
+
     return (
       <>
         {!this.props.isLoggedIn && <Redirect to="/login" />}
@@ -101,13 +102,16 @@ class Home extends Component {
         </header>
 
         <form className="city-search" onSubmit={this.handleSubmit}>
-          <label className="label">Enter city zipcode or city zipcode and country code</label>
+          <label className="label">
+            Enter city zipcode to search in the US or city zipcode and country
+            code to search outside the US
+          </label>
           <input
             type="text"
             name="cityZipcode"
             value={this.state.cityZipcode}
             onChange={this.handleChange}
-            placeholder="Dallas"
+            placeholder="75001, US"
             required
           />
           <button type="submit" className="city-button">

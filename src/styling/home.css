@@ -84,6 +84,10 @@
   background-image: url(https://images.unsplash.com/photo-1562182520-c511b8cfa0b7?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjB8fG1pc3R5JTIwcmFpbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60);
 }
 
+.untested {
+  background-image: url(https://images.unsplash.com/photo-1495107334309-fcf20504a5ab?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8ZmllbGR8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60);
+}
+
 .results-p {
   margin: 5px;
 }

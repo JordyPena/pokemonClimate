@@ -27,6 +27,11 @@ class App extends Component {
     });
   };
 
+  handleSuccessfulAuth = (props) => {
+    this.handleLogin();
+    props.history.push("/");
+  };
+
   render() {
     return (
       <>
@@ -54,6 +59,7 @@ class App extends Component {
                 {...props}
                 isLoggedIn={this.state.isLoggedIn}
                 handleLogin={this.handleLogin}
+                handleSuccessfulAuth={this.handleSuccessfulAuth}
               />
             );
           }}

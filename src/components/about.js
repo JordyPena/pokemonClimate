@@ -11,7 +11,7 @@ function About() {
         <section className="about-p">
           <p className="about-p">
             Was created as a learning tool for kids to explore interest in
-            meteorology and climates in the United States.
+            meteorology and climates around the world.
           </p>
           <p className="about-p">
             We make learning fun by involving pokemon and current weather

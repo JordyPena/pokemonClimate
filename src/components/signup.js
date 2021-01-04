@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Login from "../components/login";
+import { withRouter } from "react-router-dom";
 // variable used for 4 checks
 // lower case, upper case, number
 // 1 special character
@@ -88,7 +89,7 @@ class Signup extends Component {
         return response.json();
       })
       .then((data) => {
-        this.props.handleSuccessfulAuth();
+        this.props.handleSuccessfulAuth(this.props);
       })
       .catch((err) => {
         this.showModal(err.message);
@@ -168,10 +169,16 @@ class Signup extends Component {
       <>
         {this.state.signUp ? signupForm : ""}
         {this.state.modal ? modal : ""}
-        {this.state.login && <Login/>}
+        {this.state.login && (
+          <Login
+            handleSuccessfulAuth={this.props.handleSuccessfulAuth}
+            handleLogin={this.props.handleLogin}
+            history={this.props.history}
+          />
+        )}
       </>
     );
   }
 }
 
-export default Signup;
+export default withRouter(Signup);
