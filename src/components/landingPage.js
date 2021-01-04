@@ -12,9 +12,10 @@ class LandingPage extends Component {
 
           <section>
             <div className="welcome-h">
+              <p className="welcome-p">To Pokemon Climate</p>
               <p className="welcome-p">
-                Welcome to Pokemon Climate, this app is created for kids as a
-                learning app, To increase interest in meteorology and climate.
+                This app is created for kids as a learning app, To increase
+                interest in meteorology and climate.
               </p>
               <p className="welcome-p">
                 In order to use the app please create an account.
@@ -24,7 +25,7 @@ class LandingPage extends Component {
                 the app for your students or your children.
               </p>
               <p className="welcome-p">
-                In the search bar please type in the name of a city in the US.
+                In the search bar type in the name of a city in the US.
               </p>
               <p className="welcome-p">
                 Your results will return the weather along with a pokemon sprite

@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-
+import Login from "../components/login";
+// variable used for 4 checks
+// lower case, upper case, number
+// 1 special character
+//at the end checks string for no empty spaces
 const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
 const URL = process.env.REACT_APP_DB_URL;
 
@@ -13,14 +17,10 @@ class Signup extends Component {
       password_confirmation: "",
       error: null,
       modal: false,
-      isOver13: false,
+      signUp: true,
+      login: false,
     };
   }
-  handleAge = () => {
-    this.setState({
-      isOver13: true,
-    });
-  };
 
   handleChange = (event) => {
     this.setState({
@@ -40,6 +40,9 @@ class Signup extends Component {
       modal: true,
     });
   };
+  //creates a account
+  //when signup form is submitted
+  //check if password meets registration requirements
 
   handleSubmit = (event) => {
     const { username, password } = this.state;
@@ -93,7 +96,16 @@ class Signup extends Component {
       });
   };
 
+  handleClick = () => {
+    this.setState({
+      signUp: false,
+      login: true,
+    });
+  };
+
   render() {
+    //create modal
+    //to render when username is already in database
     const modal = (
       <div className="modal-container">
         <form className="modal" onSubmit={this.hideModal}>
@@ -104,51 +116,59 @@ class Signup extends Component {
         </form>
       </div>
     );
+
+    const signupForm = (
+      <div className="center">
+        <form onSubmit={this.handleSubmit}>
+          <h1>Sign up</h1>
+          <div className="txt-field">
+            <input
+              type="username"
+              name="username"
+              value={this.state.username}
+              onChange={this.handleChange}
+              required
+            />
+            <span></span>
+            <label>Username</label>
+          </div>
+          <div className="txt-field">
+            <input
+              type="password"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleChange}
+              required
+            />
+            <span></span>
+            <label>Password</label>
+          </div>
+          <div className="txt-field">
+            <input
+              type="password"
+              name="password_confirmation"
+              value={this.state.password_confirmation}
+              onChange={this.handleChange}
+              required
+            />
+            <span></span>
+            <label>Password Confirmation</label>
+          </div>
+          {this.state.error}
+          <button className="signup-button" type="submit">
+            Sign up
+          </button>
+          <div className="member-p">
+            <button onClick={() => this.handleClick()}>Login</button>
+          </div>
+        </form>
+      </div>
+    );
     return (
       <>
+        {this.state.signUp ? signupForm : ""}
         {this.state.modal ? modal : ""}
-        <div className="center">
-          <form onSubmit={this.handleSubmit}>
-            <h1>Sign up</h1>
-            <div className="txt-field">
-              <input
-                type="username"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleChange}
-                required
-              />
-              <span></span>
-              <label>Username</label>
-            </div>
-            <div className="txt-field">
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleChange}
-                required
-              />
-              <span></span>
-              <label>Password</label>
-            </div>
-            <div className="txt-field">
-              <input
-                type="password"
-                name="password_confirmation"
-                value={this.state.password_confirmation}
-                onChange={this.handleChange}
-                required
-              />
-              <span></span>
-              <label>Password Confirmation</label>
-            </div>
-            {this.state.error}
-            <button className="signup-button" type="submit">
-              Sign up
-            </button>
-          </form>
-        </div>
+        {this.state.login && <Login/>}
       </>
     );
   }

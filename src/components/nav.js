@@ -36,24 +36,24 @@ function Nav(props) {
           </li>
           <li className="nav-text">
             <Link to="/">
-              <AiIcons.AiFillHome />
+              <AiIcons.AiFillHome /> Home
             </Link>
           </li>
           <li className="nav-text">
             <Link to="/about">
-              <BsIcons.BsFillInfoCircleFill />
+              <BsIcons.BsFillInfoCircleFill /> About
             </Link>
           </li>
           {props.isLoggedIn === false ? (
             <li className="nav-text">
               <Link to="/login">
-                <AiIcons.AiOutlineLogin />
+                <AiIcons.AiOutlineLogin /> Login
               </Link>
             </li>
           ) : (
             <li className="nav-text">
               <button onClick={() => handleLogoutClick()}>
-                <FiIcons.FiLogOut />
+                <FiIcons.FiLogOut /> Logout
               </button>
             </li>
           )}

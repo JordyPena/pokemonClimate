@@ -101,12 +101,21 @@ form .txt-field {
 }
 
 .member-p button {
-  color: blue;
-  text-decoration: none;
+  width: 30%;
+  height: 30px;
+  border: 1px solid;
+  background: red;
+  border-radius: 25px;
+  font-size: 18px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
 }
 
-.member-p a:hover {
-  text-decoration: underline;
+.member-p button:hover {
+  border-color: black;
+  transition: 0.5s;
 }
 
 .warning {

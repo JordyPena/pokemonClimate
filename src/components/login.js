@@ -9,8 +9,8 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      username: "demo",
-      password: "Password1!",
+      username: "",
+      password: "",
       modal: false,
       signUp: false,
       login: true,
@@ -40,7 +40,8 @@ class Login extends Component {
       [event.target.name]: event.target.value,
     });
   };
-
+  //get account when user
+  //submits login form with a username and password
   handleSubmit = (event) => {
     const { username, password } = this.state;
     const data = { username, password };
@@ -73,6 +74,8 @@ class Login extends Component {
   };
 
   render() {
+    //create modal
+    //to render when username is not in database
     const modal = (
       <div className="modal-container">
         <form className="modal" onSubmit={this.hideModal}>
@@ -110,6 +113,12 @@ class Login extends Component {
             <span></span>
             <label>Password</label>
           </div>
+          <div className="member-p">
+            <p>Demo credentials</p>
+            <p>Username: demo</p>
+            <p>Password: Password1!</p>
+          </div>
+
           <button className="login-button" type="submit">
             Login
           </button>
@@ -124,11 +133,12 @@ class Login extends Component {
 
     return (
       <>
-        {this.props.history.action === "REPLACE" && pleaseLogin}
+        {console.log(this.props.history)}
+        {this.props.history === undefined || this.props.history.action === "REPLACE" && pleaseLogin}
         {this.state.login ? loginForm : ""}
         {this.state.modal ? modal : ""}
         {this.state.signUp && (
-          <Signup handleSuccessfulAuth={this.handleSuccessfulAuth} />
+          <Signup handleSuccessfulAuth={this.handleSuccessfulAuth}/>
         )}
       </>
     );
