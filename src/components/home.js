@@ -26,6 +26,7 @@ class Home extends Component {
     this.state = {
       cityZipcode: "",
       weather: "",
+      invalidSearch: false,
     };
   }
 
@@ -45,6 +46,9 @@ class Home extends Component {
     )
       .then((response) => {
         if (response.status === 404) {
+          this.setState({
+            invalidSearch: true,
+          });
           throw new Error("City not found");
         }
         return response.json();
@@ -52,6 +56,7 @@ class Home extends Component {
       .then((data) => {
         this.setState({
           weather: data,
+          invalidSearch: false,
         });
       })
       .catch((error) => {
@@ -92,7 +97,7 @@ class Home extends Component {
     // create variables to use in jsx
 
     const [pokemon, bgImage] = this.state.weather && this.getPokemon();
-
+    const invalidEntry = <h3 className="invalid">City not found</h3>;
     return (
       <>
         {!this.props.isLoggedIn && <Redirect to="/login" />}
@@ -100,12 +105,13 @@ class Home extends Component {
         <header className="header-home">
           <h1>Pokemon Climate</h1>
         </header>
-
+        {this.state.invalidSearch && invalidEntry}
         <form className="city-search" onSubmit={this.handleSubmit}>
           <label className="label">
             Enter city zipcode to search in the US or city zipcode and country
             code to search outside the US
           </label>
+
           <input
             type="text"
             name="cityZipcode"
@@ -114,6 +120,7 @@ class Home extends Component {
             placeholder="75001, US"
             required
           />
+
           <button type="submit" className="city-button">
             Search
           </button>

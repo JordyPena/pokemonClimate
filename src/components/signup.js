@@ -167,8 +167,8 @@ class Signup extends Component {
     );
     return (
       <>
-        {this.state.signUp ? signupForm : ""}
-        {this.state.modal ? modal : ""}
+        {this.state.signUp && signupForm}
+        {this.state.modal && modal}
         {this.state.login && (
           <Login
             handleSuccessfulAuth={this.props.handleSuccessfulAuth}

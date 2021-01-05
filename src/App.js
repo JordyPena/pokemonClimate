@@ -5,30 +5,27 @@ import Nav from "./components/nav";
 import Home from "./components/home";
 import About from "./components/about";
 import Login from "./components/login";
+import tokenService from "./services/token-service";
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isLoggedIn: false,
+      isLoggedIn: tokenService.hasAuthToken(),
     };
   }
 
-  handleLogin = () => {
-    this.setState({
-      isLoggedIn: true,
-    });
-  };
-
   handleLogout = () => {
     this.setState({
-      isLoggedIn: false,
+      isLoggedIn: tokenService.clearAuthToken(),
     });
   };
 
   handleSuccessfulAuth = (props) => {
-    this.handleLogin();
+    this.setState({
+      isLoggedIn: tokenService.hasAuthToken(),
+    });
     props.history.push("/");
   };
 

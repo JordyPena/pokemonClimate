@@ -5,6 +5,8 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import * as BsIcons from "react-icons/bs";
 import * as FiIcons from "react-icons/fi";
+import TokenService from "../services/token-service";
+import tokenService from "../services/token-service";
 
 function Nav(props) {
   const [sidebar, setSidebar] = useState(false);
@@ -14,6 +16,7 @@ function Nav(props) {
   };
 
   const handleLogoutClick = () => {
+    TokenService.clearAuthToken(); // to delete my auth token proving they are logged out
     props.handleLogout();
     if (props.history === undefined) return;
     props.history.push("/");
@@ -44,7 +47,8 @@ function Nav(props) {
               <BsIcons.BsFillInfoCircleFill /> About
             </Link>
           </li>
-          {props.isLoggedIn === false ? (
+          {/* here is where i can add authtoken conditional instead of state conditional */}
+          {!tokenService.hasAuthToken() ? (
             <li className="nav-text">
               <Link to="/login">
                 <AiIcons.AiOutlineLogin /> Login

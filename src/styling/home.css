@@ -48,6 +48,10 @@
   padding: 15px;
 }
 
+.invalid {
+  color: yellow;
+}
+
 .rain {
   background-image: url(https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8cmFpbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=60);
 }

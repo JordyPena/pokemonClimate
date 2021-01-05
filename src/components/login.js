@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../styling/login.css";
 import Signup from "../components/signup";
 import { withRouter } from "react-router-dom";
+import TokenService from "../services/token-service.js";
 
 const URL = process.env.REACT_APP_DB_URL;
 
@@ -40,20 +41,21 @@ class Login extends Component {
   //submits login form with a username and password
   handleSubmit = (event) => {
     const { username, password } = this.state;
-    const data = { username, password };
+    const user = { username, password };
     event.preventDefault();
     fetch(`${URL}/api/accounts/account`, {
       method: "POST",
-      body: JSON.stringify(data),
+      body: JSON.stringify(user),
       headers: {
         "Content-type": "application/json",
       },
     })
       .then((response) => response.json())
-      .then((data) => {
-        if (data.error) {
+      .then((user) => {
+        if (user.error) {
           this.showModal();
         } else {
+          TokenService.saveAuthToken(user.authToken);
           this.props.handleSuccessfulAuth(this.props);
         }
       })
@@ -131,8 +133,8 @@ class Login extends Component {
       <>
         {this.props.history === undefined ||
           (this.props.history.action === "REPLACE" && pleaseLogin)}
-        {this.state.login ? loginForm : ""}
-        {this.state.modal ? modal : ""}
+        {this.state.login && loginForm}
+        {this.state.modal && modal}
         {this.state.signUp && (
           <Signup
             handleSuccessfulAuth={this.props.handleSuccessfulAuth}
