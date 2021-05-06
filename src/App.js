@@ -14,7 +14,7 @@ class App extends Component {
       isLoggedIn: false,
     };
   }
-
+// temp
   handleLogin = () => {
     this.setState({
       isLoggedIn: true,
